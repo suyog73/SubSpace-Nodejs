@@ -20,13 +20,16 @@ const getBlogStats = memoize(async () => {
     const blogData = response.data;
 
     const totalBlogs = blogData.blogs.length;
+
     const longestTitleBlog = lodash.maxBy(
       blogData.blogs,
       (blog) => blog.title.length
     );
+
     const privacyBlogs = lodash.filter(blogData.blogs, (blog) =>
       lodash.toLower(blog.title).includes("privacy")
     );
+
     const uniqueBlogTitles = lodash
       .uniqBy(blogData.blogs, (blog) => lodash.toLower(blog.title))
       .map((blog) => blog.title);
@@ -93,7 +96,7 @@ app.get("/api/blog-search", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
